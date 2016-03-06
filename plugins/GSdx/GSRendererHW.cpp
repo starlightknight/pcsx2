@@ -577,7 +577,8 @@ void GSRendererHW::Draw()
 
 	if(fm != 0xffffffff && rt)
 	{
-		rt->m_valid = rt->m_valid.runion(r);
+		//rt->m_valid = rt->m_valid.runion(r);
+		rt->UpdateValidity(r);
 
 		m_tc->InvalidateVideoMem(context->offset.fb, r, false);
 
@@ -586,7 +587,8 @@ void GSRendererHW::Draw()
 
 	if(zm != 0xffffffff && ds)
 	{
-		ds->m_valid = ds->m_valid.runion(r);
+		//ds->m_valid = ds->m_valid.runion(r);
+		ds->UpdateValidity(r);
 
 		m_tc->InvalidateVideoMem(context->offset.zb, r, false);
 
@@ -635,7 +637,7 @@ void GSRendererHW::Draw()
 	}
 
 	#ifdef DISABLE_HW_TEXTURE_CACHE
-	
+
 	if (rt)
 		m_tc->Read(rt, r);
 
