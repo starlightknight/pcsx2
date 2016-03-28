@@ -25,6 +25,7 @@
 GSRendererHW::GSRendererHW(GSTextureCache* tc)
 	: m_width(1280)
 	, m_height(1024)
+	, m_min_height(0)
 	, m_skip(0)
 	, m_reset(false)
 	, m_upscale_multiplier(1)
@@ -58,7 +59,13 @@ void GSRendererHW::SetScaling()
 	int fb_width = max({ (int)m_context->FRAME.FBW * 64, crtc_size.x , 512 });
 	// GS doesn't have a specific register for the FrameBuffer height. so we get the height
 	// from physical units of the display rectangle in case the game uses a heigher value of height.
-	int fb_height = (fb_width < 1024) ? max(512, crtc_size.y) : 1024;
+	//
+	// Gregory: the framebuffer must have enough room to draw
+	// * at least 2 frames such as FMV (see OI_BlitFMV)
+	// * high resolution game such as snowblind engine game
+	//int fb_height = max(1024, 2*crtc_size.y);
+	int default_height = (fb_width < 1024) ? 512 : 1024;
+	int fb_height = max({default_height, crtc_size.y, m_min_height});
 
 	int upscaled_fb_w = fb_width * m_upscale_multiplier;
 	int upscaled_fb_h = fb_height * m_upscale_multiplier;
@@ -174,6 +181,7 @@ GSTexture* GSRendererHW::GetOutput(int i, int& y_offset)
 			ASSERT(DISPFB.PSM == PSM_PSMCT32 || DISPFB.PSM == PSM_PSMCT24);
 			y_offset = delta / DISPFB.FBW;
 			GL_CACHE("Frame y offset %d pixels, unit %d", y_offset, i);
+			m_min_height = max(m_min_height, 2 * y_offset);
 		}
 
 		if(s_dump)
@@ -835,6 +843,8 @@ bool GSRendererHW::OI_BlitFMV(GSTextureCache::Target* _rt, GSTextureCache::Sourc
 		GL_PUSH("OI_BlitFMV");
 
 		GL_INS("OI_BlitFMV");
+
+		m_min_height = max(m_min_height, r_draw.w);
 
 		// The draw is done past the RT at the location of the texture. To avoid various upscaling mess
 		// We will blit the data from the top to the bottom of the texture manually.

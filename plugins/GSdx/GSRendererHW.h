@@ -32,6 +32,7 @@ class GSRendererHW : public GSRenderer
 private:
 	int m_width;
 	int m_height;
+	int m_min_height;
 	int m_skip;
 	bool m_reset;
 	int m_upscale_multiplier;
