@@ -25,7 +25,7 @@
 
 #ifdef ENABLE_OPENCL
 
-__aligned(struct, 32) GSVertexCL
+alignas(32) struct GSVertexCL
 {
 	GSVector4 p, t;
 };
@@ -145,7 +145,7 @@ class GSRendererCL : public GSRenderer
 		}
 	};
 
-	__aligned(struct, 32) TFXParameter
+	alignas(32) struct TFXParameter
 	{
 		GSVector4i scissor;
 		GSVector4i dimx; // 4x4 signed char

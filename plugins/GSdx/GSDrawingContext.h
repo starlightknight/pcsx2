@@ -24,7 +24,7 @@
 #include "GS.h"
 #include "GSLocalMemory.h"
 
-__aligned(class, 32) GSDrawingContext
+alignas(32) class GSDrawingContext
 {
 public:
 	GIFRegXYOFFSET	XYOFFSET;

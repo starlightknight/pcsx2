@@ -29,7 +29,7 @@
 
 class GSState;
 
-__aligned(class, 32) GSVertexTrace : public GSAlignedClass<32>
+alignas(32) class GSVertexTrace : public GSAlignedClass<32>
 {
 public:
 	struct Vertex {GSVector4i c; GSVector4 p, t;};
@@ -61,7 +61,7 @@ public:
 		struct {uint32 rgba:16, xyzf:4, stq:4;};
 	} m_eq;
 
-	union 
+	union
 	{
 		struct {uint32 mmag:1, mmin:1, linear:1;};
 	} m_filter;

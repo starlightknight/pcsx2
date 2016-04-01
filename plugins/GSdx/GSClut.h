@@ -28,7 +28,7 @@
 
 class GSLocalMemory;
 
-__aligned(class, 32) GSClut : public GSAlignedClass<32>
+alignas(32) class GSClut : public GSAlignedClass<32>
 {
 	GSLocalMemory* m_mem;
 
@@ -37,7 +37,7 @@ __aligned(class, 32) GSClut : public GSAlignedClass<32>
 	uint32* m_buff32;
 	uint64* m_buff64;
 
-	__aligned(struct, 32) WriteState
+	alignas(32) struct WriteState
 	{
 		GIFRegTEX0 TEX0;
 		GIFRegTEXCLUT TEXCLUT;
@@ -45,7 +45,7 @@ __aligned(class, 32) GSClut : public GSAlignedClass<32>
 		bool IsDirty(const GIFRegTEX0& TEX0, const GIFRegTEXCLUT& TEXCLUT);
 	} m_write;
 
-	__aligned(struct, 32) ReadState
+	alignas(32) struct ReadState
 	{
 		GIFRegTEX0 TEX0;
 		GIFRegTEXA TEXA;

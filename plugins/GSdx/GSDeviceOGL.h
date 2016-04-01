@@ -117,7 +117,7 @@ public:
 class GSDeviceOGL : public GSDevice
 {
 	public:
-	__aligned(struct, 32) VSConstantBuffer
+	alignas(32) struct VSConstantBuffer
 	{
 		GSVector4 Vertex_Scale_Offset;
 		GSVector4 TextureScale;
@@ -187,7 +187,7 @@ class GSDeviceOGL : public GSDevice
 		GSSelector(uint32 k) : key(k) {}
 	};
 
-	__aligned(struct, 32) PSConstantBuffer
+	alignas(32) struct PSConstantBuffer
 	{
 		GSVector4 FogColor_AREF;
 		GSVector4 WH;

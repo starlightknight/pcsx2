@@ -23,7 +23,7 @@
 
 #include "GPU.h"
 
-__aligned(class, 32) GPUDrawingEnvironment
+alignas(32) class GPUDrawingEnvironment
 {
 public:
 	GPURegSTATUS STATUS;

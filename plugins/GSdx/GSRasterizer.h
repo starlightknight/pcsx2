@@ -28,7 +28,7 @@
 #include "GSPerfMon.h"
 #include "GSThread_CXX11.h"
 
-__aligned(class, 32) GSRasterizerData : public GSAlignedClass<32>
+alignas(32) class GSRasterizerData : public GSAlignedClass<32>
 {
 	static int s_counter;
 
@@ -122,7 +122,7 @@ public:
 	virtual void PrintStats() = 0;
 };
 
-__aligned(class, 32) GSRasterizer : public IRasterizer
+alignas(32) class GSRasterizer : public IRasterizer
 {
 protected:
 	GSPerfMon* m_perfmon;

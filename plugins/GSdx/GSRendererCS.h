@@ -44,7 +44,7 @@ class GSRendererCS : public GSRenderer
 		VSSelector() : key(0) {}
 	};
 
-	__aligned(struct, 32) VSConstantBuffer
+	alignas(32) struct VSConstantBuffer
 	{
 		GSVector4 VertexScale;
 		GSVector4 VertexOffset;
@@ -86,7 +86,7 @@ class GSRendererCS : public GSRenderer
 		PSSelector() : key(0) {}
 	};
 
-	__aligned(struct, 32) PSConstantBuffer
+	alignas(32) struct PSConstantBuffer
 	{
 		uint32 fm;
 		uint32 zm;

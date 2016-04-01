@@ -29,7 +29,7 @@ class GSRendererSW : public GSRenderer
 {
 	class SharedData : public GSDrawScanline::SharedData
 	{
-		__aligned(struct, 16) TextureLevel 
+		alignas(16) struct TextureLevel
 		{
 			GSVector4i r; 
 			GSTextureCacheSW::Texture* t;

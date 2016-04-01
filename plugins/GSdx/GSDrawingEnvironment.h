@@ -23,7 +23,7 @@
 
 #include "GS.h"
 
-__aligned(class, 32) GSDrawingEnvironment
+alignas(32) class GSDrawingEnvironment
 {
 public:
 	GIFRegPRIM			PRIM;

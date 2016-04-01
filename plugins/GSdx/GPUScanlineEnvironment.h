@@ -56,7 +56,7 @@ union GPUScanlineSelector
 	operator uint32() const {return key;}
 };
 
-__aligned(struct, 32) GPUScanlineGlobalData
+alignas(32) struct GPUScanlineGlobalData
 {
 	GPUScanlineSelector sel;
 
@@ -66,7 +66,7 @@ __aligned(struct, 32) GPUScanlineGlobalData
 	GSVector4i twin; // TWW, TWH, TWX, TWY
 };
 
-__aligned(struct, 32) GPUScanlineLocalData
+alignas(32) struct GPUScanlineLocalData
 {
 	const GPUScanlineGlobalData* gd;
 
